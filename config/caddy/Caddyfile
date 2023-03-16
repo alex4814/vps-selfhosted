@@ -1,0 +1,44 @@
+{
+	order reverse_proxy before route
+	admin off
+	log {
+		output file /var/log/caddy/error.log
+		level ERROR
+	}
+	email 2023@gmail.com
+	servers :443 {
+		protocols h1 h2
+	}
+}
+
+:443, your.domain {
+	tls {
+		protocols tls1.2 tls1.2
+		ciphers TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+		curves x25519 secp521r1 secp384r1 secp256r1
+	}
+
+	@vlgrpc {
+		protocol grpc
+		path /wXC6QwT68MZk/*
+	}
+	reverse_proxy @vlgrpc v2ray:38202 {
+		transport http {
+			versions h2c 2
+		}
+		flush_interval -1
+		header_up X-Real-IP {remote_host}
+	}
+
+	@host {
+		host your.domain
+	}
+	route @host {
+		header {
+			Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+		}
+		file_server {
+			root /srv
+		}
+	}
+}
