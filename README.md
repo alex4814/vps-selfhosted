@@ -2,15 +2,25 @@
 
 
 ## Prerequisites
-To use iHost, you only need to install:
+To use iHost, you need to install [Docker Engine](https://docs.docker.com/engine/install/) v20.10+
+(with [Docker Compose](https://docs.docker.com/compose/) v2.15+).
 
-1. [Docker Engine](https://docs.docker.com/engine/install/) v20.10+
-(with [Docker Compose](https://docs.docker.com/compose/) v2.15+)
+Example for Linux Debian:
+
+    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+If you install Docker Engine for the first time on a new host machine, refer to [official instructions](https://docs.docker.com/engine/install/debian/) on Debian.
 
 
 ## Services
 
-### v2ray
+### V2ray
+TODO
+
+### FreshRSS
+TODO
+
+### Bitwarden
 TODO
 
 
@@ -20,3 +30,8 @@ TODO
 
 ## Restore
 TODO
+
+
+## Thanks
+[Docker Practice](https://github.com/yeasy/docker_practice)  
+[LNMP Docker](https://github.com/khs1994-docker/lnmp)
