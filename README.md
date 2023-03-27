@@ -15,13 +15,16 @@ If you install Docker Engine for the first time on a new host machine, refer to 
 ## Services
 
 ### V2ray
-TODO
+> https://github.com/v2fly/v2ray-core
 
 ### FreshRSS
-TODO
+> https://github.com/FreshRSS/FreshRSS
 
 ### Bitwarden
-TODO
+> https://github.com/bitwarden/server
+
+### memos
+> https://github.com/usememos/memos
 
 
 ## Backup

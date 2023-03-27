@@ -41,6 +41,13 @@ services:
       TZ: Asia/Shanghai
       CRON_MIN: "*/2"
 
+  memos:
+    image: "neosmemo/memos:${TAG_MEMOS:-latest}"
+    volumes:
+      - ./app/memos:/var/opt/memos
+    ports:
+      - "38404:5230"
+
 
 volumes:
   caddy_data:
