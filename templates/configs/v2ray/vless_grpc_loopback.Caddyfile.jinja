@@ -1,0 +1,12 @@
+{%- set v2ray = settings.secrets.v2ray %}
+@vlgrpc {
+    protocol grpc
+    path /{{ v2ray.grpc.service_name }}/*
+}
+reverse_proxy @vlgrpc v2ray:{{ v2ray.port }} {
+    transport http {
+        versions h2c 2
+    }
+    flush_interval -1
+    header_up X-Real-IP {remote_host}
+}

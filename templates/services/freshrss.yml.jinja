@@ -1,0 +1,11 @@
+image: "freshrss/freshrss:${TAG_FRESHRSS:-latest}"
+restart: unless-stopped
+ports:
+  - "{{ freshrss.port }}"
+volumes:
+  - freshrss_data:/var/www/FreshRSS/data
+  - freshrss_extension:/var/www/FreshRSS/extensions
+  - ./config/freshrss/config.custom.php:/var/www/FreshRSS/data/config.custom.php
+environment:
+  TZ: Asia/Shanghai
+  CRON_MIN: "*/2"

@@ -1,0 +1,13 @@
+{%- set blog = settings.secrets.blog %}
+build: .
+restart: unless-stopped
+ports:
+  - "80:80"
+  - "443:443"
+  - "443:443/udp"
+volumes:
+  - ./config/caddy/Caddyfile:/etc/caddy/Caddyfile
+  - ./log/caddy:/var/log/caddy
+  - {{ blog.root }}:/srv
+  - caddy_data:/data
+  - caddy_config:/config

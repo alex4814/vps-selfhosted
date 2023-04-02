@@ -1,0 +1,21 @@
+version: "3.9"
+{%- set services = settings.dockers %}
+
+services:
+  {% for name, service in services.items() if service.enabled or service.template %}
+{%- if service.template %}
+  {{ name }}:
+{%- filter indent(width=4) %}
+{% include service.template %}
+{%- endfilter %}
+{%- endif %}
+  {% endfor %}
+
+volumes:
+  {%- for name, service in services.items() if service.enabled or service.volume_template %}
+{%- if service.volume_template %}
+{% filter indent(width=2) %}
+{% include service.volume_template %}
+{% endfilter %}
+{%- endif %}
+  {%- endfor %}

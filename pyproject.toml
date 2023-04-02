@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "vps-selfhosted"
+version = "0.1.0"
+description = ""
+authors = ["alex4814 <alex4814@126.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "vps_selfhosted"}]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+Jinja2 = "^3.1.2"
+pyyaml = "^6.0"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.3.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

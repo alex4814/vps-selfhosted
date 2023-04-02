@@ -1,0 +1,55 @@
+dockers:
+
+  caddy:
+    template: templates/services/caddy.yml.jinja
+    volume_template: templates/volumes/caddy.yml.jinja
+    config_template: templates/configs/caddy/Caddyfile.jinja
+
+  blog:
+    enabled: true
+
+  v2ray:
+    enabled: true
+    template: templates/services/v2ray.yml.jinja
+    scheme: "vless_grpc_loopback"
+    config_template:
+      vless_grpc_loopback: templates/configs/v2ray/vless_grpc_loopback.json.jinja
+
+  freshrss:
+    enabled: false
+
+  memos:
+    enabled: false
+
+  remak42:
+    enabled: false
+
+
+secrets:
+
+  blog:
+    domain: example.com
+    root: ./app/blank
+
+  v2ray:
+    domain: example.com
+    port: 38202
+    uuid: 8df0b414-0563-4a14-a13c-ecc7361943c3
+    grpc:
+      service_name: qtJ7akR2
+
+  freshrss:
+    domain: freshrss.example.com
+    port: 38303
+
+  memos:
+    domain: memos.example.com
+    port: 38404
+
+  remak42:
+    domain: remark42.example.com
+
+
+user:
+ 
+  email: fake@2023.year
