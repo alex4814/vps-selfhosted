@@ -1,1 +1,7 @@
-*.log
+# generated configurations
+docker-compose.yml
+config/caddy/
+config/v2ray/
+
+# log files
+log/

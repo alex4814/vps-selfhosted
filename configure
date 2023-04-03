@@ -36,13 +36,21 @@ def configure_services(env):
                 tmpl = tmpl[scheme]
             t = env.get_template(tmpl)
             output = t.render(settings=settings)
-            with open(f"config/{name}/{Path(tmpl).stem}", "w") as fp:
+            target = Path("config", name, Path(tmpl).stem)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            with open(target, "w") as fp:
                 fp.write(output)
+
+
+def configure_files():
+    Path("log/caddy").mkdir(parents=True, exist_ok=True)
+    Path("log/v2ray").mkdir(parents=True, exist_ok=True)
 
 
 def configure(env):
     configure_docker_compose(env)
     configure_services(env)
+    configure_files()
 
 
 if __name__ == "__main__":
