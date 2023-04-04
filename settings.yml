@@ -4,6 +4,7 @@ dockers:
     template: templates/services/caddy.yml.jinja
     volume_template: templates/volumes/caddy.yml.jinja
     config_template: templates/configs/caddy/Caddyfile.jinja
+    acme_dns: cloudflare
 
   blog:
     enabled: true
@@ -48,6 +49,11 @@ secrets:
 
   remak42:
     domain: remark42.example.com
+
+
+tokens:
+
+  cloudflare: e09062f1fd2545555fc8a15fceda2222
 
 
 user:

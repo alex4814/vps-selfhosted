@@ -9,6 +9,9 @@
         level ERROR
     }
     email {{ settings.user.email }}
+    {%- if services.caddy.acme_dns %}
+    acme_dns {{ services.caddy.acme_dns }} {{ settings.tokens[services.caddy.acme_dns] }}
+    {%- endif %}
     servers :443 {
         protocols h1 h2
     }
