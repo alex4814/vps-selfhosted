@@ -1,7 +1,10 @@
-# generated configurations
+# Generated configurations
 docker-compose.yml
 config/caddy/
 config/v2ray/
 
 # log files
 log/
+
+# secret values
+secrets.yml

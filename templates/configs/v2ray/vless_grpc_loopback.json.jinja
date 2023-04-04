@@ -1,3 +1,4 @@
+{%- set v2ray = settings.services.v2ray %}
 {
     "log": {
       "loglevel": "warning",
@@ -6,13 +7,13 @@
     },
     "inbounds": [
       {
-        "port": 38202,
+        "port": {{ v2ray.port }},
         "protocol": "vless",
         "settings": {
           "clients": [
             {
-              "id": "648f32b8-25a0-41f7-aacb-6858b46793b9",
-              "email": "2023@gmail.com"
+              "id": "{{ v2ray.uuid }}",
+              "email": "{{ settings.user.email }}"
             }
           ],
           "decryption": "none"
@@ -21,7 +22,7 @@
           "network": "grpc",
           "security": "none",
           "grpcSettings": {
-            "serviceName": "wXC6QwT68MZk"
+            "serviceName": "{{ v2ray.grpc.service_name }}"
           }
         },
         "sniffing": {

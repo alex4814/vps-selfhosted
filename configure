@@ -10,11 +10,14 @@ import yaml
 def context():
     with open("settings.yml", "r") as fp:
         settings = yaml.safe_load(fp)
+    with open("secrets.yml", "r") as fp:
+        secrets = yaml.safe_load(fp)
     domains = set()
     for name, service in settings["dockers"].items():
         if service.get("enabled", False):
-            domains.add(settings["secrets"][name]["domain"])
+            domains.add(secrets["services"][name]["domain"])
     settings["domains"] = list(domains)
+    settings.update(secrets)
     return settings
 
 

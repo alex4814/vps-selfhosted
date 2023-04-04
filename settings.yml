@@ -24,38 +24,3 @@ dockers:
 
   remak42:
     enabled: false
-
-
-secrets:
-
-  blog:
-    domain: example.com
-    root: ./app/blank
-
-  v2ray:
-    domain: example.com
-    port: 38202
-    uuid: 8df0b414-0563-4a14-a13c-ecc7361943c3
-    grpc:
-      service_name: qtJ7akR2
-
-  freshrss:
-    domain: freshrss.example.com
-    port: 38303
-
-  memos:
-    domain: memos.example.com
-    port: 38404
-
-  remak42:
-    domain: remark42.example.com
-
-
-tokens:
-
-  cloudflare: e09062f1fd2545555fc8a15fceda2222
-
-
-user:
- 
-  email: fake@2023.year

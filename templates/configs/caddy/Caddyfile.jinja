@@ -1,5 +1,5 @@
 {%- set services = settings.dockers -%}
-{%- set secrets = settings.secrets -%}
+{%- set secrets = settings.services -%}
 {%- set domains = settings.domains -%}
 {
     order reverse_proxy before route

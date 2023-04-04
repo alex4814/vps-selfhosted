@@ -1,4 +1,4 @@
-{%- set v2ray = settings.secrets.v2ray %}
+{%- set v2ray = settings.services.v2ray %}
 @vlgrpc {
     protocol grpc
     path /{{ v2ray.grpc.service_name }}/*
