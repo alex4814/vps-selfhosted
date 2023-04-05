@@ -1,0 +1,42 @@
+{%- set remark42 = settings.services.remark42 %}
+{%- set oauth = settings.tokens.remark42 %}
+image: umputun/remark42:${TAG_REMARK42:-latest}
+restart: always
+volumes:
+  - ./app/remark42:/srv/var
+
+logging:
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "5"
+
+environment:
+  - REMARK_URL={{ remark42.domain }}
+  - SITE={{ remark42.site }}
+  - SECRET={{ remark42.secret }}
+  - AUTH_ANON={{ settings.dockers.remark42.anonymous_login | default(false) }}
+  {%- if oauth.google and oauth.google.client_id and oauth.google.client_secret %}
+  - AUTH_GOOGLE_CID={{ oauth.google.client_id }}
+  - AUTH_GOOGLE_CSEC={{ oauth.google.client_secret }}
+  {%- endif %}
+  {%- if oauth.github and oauth.github.client_id and oauth.github.client_secret %}
+  - AUTH_GITHUB_CID={{ oauth.github.client_id }}
+  - AUTH_GITHUB_CSEC={{ oauth.github.client_secret }}
+  {%- endif %}
+  {%- if oauth.facebook and oauth.facebook.client_id and oauth.facebook.client_secret %}
+  - AUTH_FACEBOOK_CID={{ oauth.facebook.client_id }}
+  - AUTH_FACEBOOK_CSEC={{ oauth.facebook.client_secret }}
+  {%- endif %}
+  {%- if oauth.disqus and oauth.disqus.client_id and oauth.disqus.client_secret %}
+  - AUTH_DISQUS_CID={{ oauth.disqus.client_id }}
+  - AUTH_DISQUS_CSEC={{ oauth.disqus.client_secret }}
+  {%- endif %}
+  {%- if remark42.admins %}
+  - ADMIN_SHARED_ID={% for id in remark42.admins %}{{ id }}{% if not loop.last %},{% endif %}{% endfor %}
+  {%- endif %}
+
+  # Enable it only for the initial comment import or for manual backups.
+  # Do not leave the server running with the ADMIN_PASSWD set if you don't have an intention
+  # to keep creating backups manually!
+  # - ADMIN_PASSWD=<your secret password>

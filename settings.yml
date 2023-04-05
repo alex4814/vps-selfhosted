@@ -22,5 +22,7 @@ dockers:
   memos:
     enabled: false
 
-  remak42:
-    enabled: false
+  remark42:
+    enabled: true
+    template: templates/services/remark42.yml.jinja
+    anonymous_login: true

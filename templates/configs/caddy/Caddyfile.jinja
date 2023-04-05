@@ -1,6 +1,6 @@
-{%- set services = settings.dockers -%}
-{%- set secrets = settings.services -%}
-{%- set domains = settings.domains -%}
+{% set services = settings.dockers -%}
+{% set secrets = settings.services -%}
+{% set domains = settings.domains -%}
 {
     order reverse_proxy before route
     admin off
@@ -28,9 +28,15 @@
     }
 
     {%- if services.v2ray.enabled %}
-{%- filter indent(width=4) %}
+{% filter indent(width=4) %}
 {% include "templates/configs/v2ray/" + services.v2ray.scheme + ".Caddyfile.jinja" %}
-{%- endfilter %}
+{% endfilter %}
+    {%- endif %}
+
+    {%- if services.remark42.enabled %}
+{% filter indent(width=4) %}
+{% include "templates/configs/remark42/Caddyfile.jinja" %}
+{% endfilter %}
     {%- endif %}
 
     @host_blog {

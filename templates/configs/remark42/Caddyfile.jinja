@@ -1,0 +1,5 @@
+{% set remark42 = settings.services.remark42 -%}
+@host_remark42 {
+    host {{ remark42.domain }}
+}
+reverse_proxy @host_remark42 remark42:8080

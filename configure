@@ -46,8 +46,13 @@ def configure_services(env):
 
 
 def configure_files():
+    settings = context()
     Path("log/caddy").mkdir(parents=True, exist_ok=True)
-    Path("log/v2ray").mkdir(parents=True, exist_ok=True)
+
+    if settings["dockers"]["v2ray"].get("enabled", False):
+        Path("log/v2ray").mkdir(parents=True, exist_ok=True)
+    if settings["dockers"]["remark42"].get("enabled", False):
+        Path("app/remark42").mkdir(parents=True, exist_ok=True)
 
 
 def configure(env):
