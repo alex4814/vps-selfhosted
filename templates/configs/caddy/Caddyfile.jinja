@@ -20,7 +20,7 @@
     }
 }
 
-:443{% for domain in domains %}, {{ domain }}{% endfor %} {
+:443{% if settings.user.domains %}{% for domain in settings.user.domains %}, *.{{ domain }}{% endfor %}{% else %}{% for domain in domains %}, {{ domain }}{% endfor %}{% endif%} {
     tls {
         protocols tls1.2 tls1.2
         ciphers TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256

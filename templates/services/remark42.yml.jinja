@@ -12,7 +12,7 @@ logging:
     max-file: "5"
 
 environment:
-  - REMARK_URL={{ remark42.domain }}
+  - REMARK_URL=https://{{ remark42.domain }}
   - SITE={{ remark42.site }}
   - SECRET={{ remark42.secret }}
   - AUTH_ANON={{ settings.dockers.remark42.anonymous_login | default(false) }}
