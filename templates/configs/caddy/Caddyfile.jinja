@@ -39,6 +39,12 @@
 {% endfilter %}
     {%- endif %}
 
+    {%- if services.memos.enabled %}
+{% filter indent(width=4) %}
+{% include "templates/configs/memos/Caddyfile.jinja" %}
+{% endfilter %}
+    {%- endif %}
+
     @host_blog {
         host {{ secrets.blog.domain }}
     }

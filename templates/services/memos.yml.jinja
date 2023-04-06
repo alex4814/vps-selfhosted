@@ -1,5 +1,5 @@
 image: "neosmemo/memos:${TAG_MEMOS:-latest}"
 volumes:
   - ./app/memos:/var/opt/memos
-ports:
-  - "{{ memos.port }}:5230"
+expose:
+  - "5230"

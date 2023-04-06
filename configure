@@ -21,6 +21,11 @@ def context():
     return settings
 
 
+def is_enabled(service):
+    settings = context()
+    return settings["dockers"][service].get("enabled", False)
+
+
 def configure_docker_compose(env):
     t = env.get_template("docker-compose.yml.jinja")
     output = t.render(settings=context())
@@ -46,13 +51,14 @@ def configure_services(env):
 
 
 def configure_files():
-    settings = context()
     Path("log/caddy").mkdir(parents=True, exist_ok=True)
 
-    if settings["dockers"]["v2ray"].get("enabled", False):
+    if is_enabled("v2ray"):
         Path("log/v2ray").mkdir(parents=True, exist_ok=True)
-    if settings["dockers"]["remark42"].get("enabled", False):
+    if is_enabled("remark42"):
         Path("app/remark42").mkdir(parents=True, exist_ok=True)
+    if is_enabled("memos"):
+        Path("app/memos").mkdir(parents=True, exist_ok=True)
 
 
 def configure(env):

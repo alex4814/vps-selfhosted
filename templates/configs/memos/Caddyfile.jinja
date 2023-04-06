@@ -1,0 +1,5 @@
+{% set memos = settings.services.memos -%}
+@host_memos {
+    host {{ memos.domain }}
+}
+reverse_proxy @host_memos memos:5230

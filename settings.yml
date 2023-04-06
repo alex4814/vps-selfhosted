@@ -20,7 +20,8 @@ dockers:
     enabled: false
 
   memos:
-    enabled: false
+    enabled: true
+    template: templates/services/memos.yml.jinja
 
   remark42:
     enabled: true
