@@ -1,0 +1,5 @@
+{% set freshrss = settings.services.freshrss -%}
+@host_freshrss {
+    host {{ freshrss.domain }}
+}
+reverse_proxy @host_freshrss freshrss:80

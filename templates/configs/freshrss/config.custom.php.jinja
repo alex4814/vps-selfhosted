@@ -1,3 +1,5 @@
+{% set configs = settings.dockers.freshrss -%}
+{% set secrets = settings.services.freshrss -%}
 <?php
 
 # See https://github.com/FreshRSS/FreshRSS/blob/edge/config.default.php
@@ -8,12 +10,12 @@ return array(
 	# Examples:
 	# https://example.net/FreshRSS/p/
 	# https://freshrss.example.net/
-	'base_url' => 'https://freshrss.example.com',
+	'base_url' => 'https://{{ secrets.domain }}',
 
 	# Natural language of the user interface, e.g. `en`, `fr`.
-	'language' => 'zh-cn',
+	'language' => '{{ configs.language | default("en") }}',
 
 	# Title of this FreshRSS instance in the Web user interface.
-	'title' => 'FreshRSS',
+	'title' => '{{ configs.title | default("FreshRSS") }}',
 
 );

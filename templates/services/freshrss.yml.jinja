@@ -1,11 +1,17 @@
-image: "freshrss/freshrss:${TAG_FRESHRSS:-latest}"
+{%- set freshrss = settings.dockers.freshrss %}
+image: "freshrss/freshrss:${TAG_FRESHRSS:-edge}"
 restart: unless-stopped
-ports:
-  - "{{ freshrss.port }}"
 volumes:
   - freshrss_data:/var/www/FreshRSS/data
-  - freshrss_extension:/var/www/FreshRSS/extensions
+  - freshrss_extensions:/var/www/FreshRSS/extensions
   - ./config/freshrss/config.custom.php:/var/www/FreshRSS/data/config.custom.php
+  - ./config/freshrss/config-user.custom.php:/var/www/FreshRSS/data/config-user.custom.php
+logging:
+  options:
+    max-size: 10m
 environment:
-  TZ: Asia/Shanghai
-  CRON_MIN: "*/2"
+  TZ: {{ settings.user.time_zone }}
+  CRON_MIN: {{ freshrss.cron }}
+{% if freshrss.development -%}
+  FRESHRSS_ENV: development
+{% endif -%}

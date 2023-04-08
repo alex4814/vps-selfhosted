@@ -1,4 +1,5 @@
 image: "neosmemo/memos:${TAG_MEMOS:-latest}"
+restart: unless-stopped
 volumes:
   - ./app/memos:/var/opt/memos
 expose:

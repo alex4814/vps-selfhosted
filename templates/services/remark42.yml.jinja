@@ -4,16 +4,17 @@ image: umputun/remark42:${TAG_REMARK42:-latest}
 restart: always
 volumes:
   - ./app/remark42:/srv/var
-
 logging:
   driver: json-file
   options:
     max-size: "10m"
     max-file: "5"
-
 environment:
   - REMARK_URL=https://{{ remark42.domain }}
   - SITE={{ remark42.site }}
+  {%- if settings.user.time_zone %}
+  - TIME_ZONE={{ settings.user.time_zone }}
+  {%- endif %}
   - SECRET={{ remark42.secret }}
   - AUTH_ANON={{ settings.dockers.remark42.anonymous_login | default(false) }}
   {%- if oauth.google and oauth.google.client_id and oauth.google.client_secret %}

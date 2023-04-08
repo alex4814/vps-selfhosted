@@ -19,7 +19,14 @@ dockers:
       vless_grpc_loopback: templates/configs/v2ray/vless_grpc_loopback.json.jinja
 
   freshrss:
-    enabled: false
+    enabled: true
+    template: templates/services/freshrss.yml.jinja
+    volume_template: templates/volumes/freshrss.yml.jinja
+    config_template: templates/configs/freshrss/config.custom.php.jinja
+
+    language: 'zh-cn'
+    development: true
+    cron: "3, 23, 43"
 
   memos:
     enabled: true
