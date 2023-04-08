@@ -6,6 +6,18 @@ from jinja2 import FileSystemLoader
 import yaml
 
 
+def to_wildcard(domains: set):
+    result = set()
+    for domain in domains:
+        parts = domain.split(".")
+        if len(parts) < 2:
+            continue
+        elif len(parts) > 2:
+            parts[0] = "*"
+        result.add(".".join(parts))
+    return result
+
+
 @functools.cache
 def context():
     with open("settings.yml", "r") as fp:
@@ -17,6 +29,7 @@ def context():
         if service.get("enabled", False):
             domains.add(secrets["services"][name]["domain"])
     settings["domains"] = list(domains)
+    settings["wildcard_domains"] = list(to_wildcard(domains))
     settings.update(secrets)
     return settings
 

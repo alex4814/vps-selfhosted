@@ -4,7 +4,9 @@ dockers:
     template: templates/services/caddy.yml.jinja
     volume_template: templates/volumes/caddy.yml.jinja
     config_template: templates/configs/caddy/Caddyfile.jinja
-    acme_dns: cloudflare
+    tls:
+      wildcard: false
+      acme_dns: cloudflare
 
   blog:
     enabled: true

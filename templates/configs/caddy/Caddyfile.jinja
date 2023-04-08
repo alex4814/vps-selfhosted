@@ -1,6 +1,5 @@
 {% set services = settings.dockers -%}
 {% set secrets = settings.services -%}
-{% set domains = settings.domains -%}
 {
     order reverse_proxy before route
     admin off
@@ -12,15 +11,20 @@
         }
     }
     email {{ settings.user.email }}
-    {%- if services.caddy.acme_dns %}
-    acme_dns {{ services.caddy.acme_dns }} {{ settings.tokens[services.caddy.acme_dns] }}
+    {%- set acme_dns_provider = services.caddy.tls.acme_dns %}
+    {%- if acme_dns_provider %}
+    acme_dns {{ acme_dns_provider }} {{ settings.tokens[acme_dns_provider] }}
     {%- endif %}
     servers :443 {
         protocols h1 h2
     }
 }
 
-:443{% if settings.user.domains %}{% for domain in settings.user.domains %}, *.{{ domain }}{% endfor %}{% else %}{% for domain in domains %}, {{ domain }}{% endfor %}{% endif%} {
+{% if services.caddy.tls.wildcard -%}
+:443{% for domain in settings.wildcard_domains %}, {{ domain }}{% endfor %} {
+{% else -%}
+:443{% for domain in settings.domains %}, {{ domain }}{% endfor %} {
+{% endif -%}
     tls {
         protocols tls1.2 tls1.2
         ciphers TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
