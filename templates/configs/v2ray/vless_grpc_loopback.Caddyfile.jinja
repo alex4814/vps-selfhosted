@@ -1,7 +1,6 @@
 {%- set v2ray = settings.services.v2ray %}
 @vlgrpc {
     protocol grpc
-    host {{ v2ray.domain }}
     path /{{ v2ray.grpc.service_name }}/*
 }
 reverse_proxy @vlgrpc v2ray:{{ v2ray.port }} {
