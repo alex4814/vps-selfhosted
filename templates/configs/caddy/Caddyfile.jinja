@@ -12,7 +12,7 @@
     }
     email {{ settings.user.email }}
     {%- set acme_dns_provider = services.caddy.tls.acme_dns %}
-    {%- if acme_dns_provider %}
+    {%- if services.caddy.tls.wildcard %}
     acme_dns {{ acme_dns_provider }} {{ settings.tokens[acme_dns_provider] }}
     {%- endif %}
     servers :443 {
