@@ -2,7 +2,7 @@ version: "3.9"
 {%- set services = settings.dockers %}
 
 services:
-  {% for name, service in services.items() if service.enabled and service.template %}
+  {% for name, service in services.items() if service.enabled or name == "caddy" %}
 {%- if service.template %}
   {{ name }}:
 {%- filter indent(width=4) %}
@@ -12,7 +12,7 @@ services:
   {% endfor %}
 
 volumes:
-{% for name, service in services.items() if service.enabled and service.volume_template -%}
+{% for name, service in services.items() if service.enabled or name == "caddy" -%}
 {% if service.volume_template -%}
 {% filter indent(width=2) %}
 {% include service.volume_template %}
