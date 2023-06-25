@@ -33,7 +33,7 @@ dockers:
 
     language: 'zh-cn'
     development: true
-    cron: "3, 23, 43"
+    cron: "3,23,43"
 
   memos:
     enabled: true
