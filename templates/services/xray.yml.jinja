@@ -1,0 +1,12 @@
+{%- set xray = settings.services.xray %}
+image: "teddysun/xray:${TAG_XRAY_CORE:-latest}"
+restart: always
+ports:
+  - "{{ xray.port }}"
+command:
+  - run
+  - -c
+  - /etc/xray/config.json
+volumes:
+  - ./config/xray/{{ settings.dockers.xray.scheme }}.json:/etc/xray/config.json
+  - ./log/xray:/var/log/xray

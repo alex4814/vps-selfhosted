@@ -12,11 +12,18 @@ dockers:
     enabled: true
 
   v2ray:
-    enabled: true
+    enabled: false
     template: templates/services/v2ray.yml.jinja
     scheme: "vless_grpc_loopback"
     config_template:
       vless_grpc_loopback: templates/configs/v2ray/vless_grpc_loopback.json.jinja
+
+  xray:
+    enabled: true
+    template: templates/services/xray.yml.jinja
+    scheme: "vless_grpc_loopback"
+    config_template:
+      vless_grpc_loopback: templates/configs/xray/vless_grpc_loopback.json.jinja
 
   freshrss:
     enabled: true

@@ -37,6 +37,9 @@ Finally, run `docker compose up -d` to start.
 ### [V2ray](https://github.com/v2fly/v2ray-core)
 > A platform for building proxies to bypass network restrictions.
 
+### [XRay](https://github.com/XTLS/Xray-core)
+> Xray, Penetrates Everything. Also the best v2ray-core, with XTLS support. Fully compatible configuration.
+
 ### [FreshRSS](https://github.com/FreshRSS/FreshRSS)
 > A free, self-hostable aggregator.
 

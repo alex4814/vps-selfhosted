@@ -1,0 +1,12 @@
+{%- set xray = settings.services.xray %}
+@vlgrpc {
+    protocol grpc
+    path /{{ xray.grpc.service_name }}/*
+}
+reverse_proxy @vlgrpc xray:{{ xray.port }} {
+    transport http {
+        versions h2c 2
+    }
+    flush_interval -1
+    header_up X-Real-IP {remote_host}
+}
