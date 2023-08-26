@@ -1,0 +1,149 @@
+{% set xray = settings.services.xray -%}
+{
+  "log": {
+    "loglevel": "warning",
+    "error": "/var/log/xray/error.log",
+    "access": "/var/log/xray/access.log"
+  },
+  "inbounds": [
+    {
+      "port": 443,
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "{{ xray.vless.uuid or xray.uuid }}",
+            "flow": "xtls-rprx-vision",
+            "email": "{{ xray.vless.email or settings.user.email }}"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "dest": "caddy:7443",
+          "xver": {{ xray.reality.xver }},
+          "serverNames": [
+            {% for name in xray.reality.server_names %}
+            "{{ name }}"{% if not loop.last %},{% endif %}
+            {% endfor %}
+          ],
+          "privateKey": "{{ xray.reality.private_key }}",
+          "shortIds": [
+            {% for short_id in xray.reality.short_ids %}
+            "{{ short_id }}"{% if not loop.last %},{% endif %}
+            {% endfor %}
+          ]
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
+      }
+    },
+    {
+      "port": 2001,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "{{ xray.vmess.uuid or xray.uuid }}",
+            "email": "{{ xray.vmess.email or settings.user.email }}"
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "none",
+        "wsSettings": {
+          "path": "{{ xray.ws.path }}"
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
+      }
+    },
+    {
+      "port": 2005,
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "{{ xray.vless.uuid or xray.uuid }}",
+            "email": "{{ xray.vless.email or settings.user.email }}"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "h2",
+        "security": "none",
+        "httpSettings": {
+          "path": "{{ xray.h2c.path }}"
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
+      }
+    },
+    {
+      "port": 2011,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "2022-blake3-chacha20-poly1305",
+        "password": "{{ xray.shadowsocks.password }}",
+        "email": "{{ xray.shadowsocks.email or settings.user.email }}"
+      },
+      "streamSettings": {
+        "network": "grpc",
+        "security": "none",
+        "grpcSettings": {
+          "serviceName": "{{ xray.grpc.service_name }}"
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
+      }
+    }
+  ],
+  "routing": {
+    "rules": [
+      {
+        "type": "field",
+        "protocol": [
+          "bittorrent"
+        ],
+        "outboundTag": "blocked"
+      }
+    ]
+  },
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    },
+    {
+      "tag": "blocked",
+      "protocol": "blackhole",
+      "settings": {}
+    }
+  ]
+}

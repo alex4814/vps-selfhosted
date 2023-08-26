@@ -66,8 +66,8 @@ def configure_services(env):
 def configure_files():
     Path("log/caddy").mkdir(parents=True, exist_ok=True)
 
-    if is_enabled("v2ray"):
-        Path("log/v2ray").mkdir(parents=True, exist_ok=True)
+    if is_enabled("xray"):
+        Path("log/xray").mkdir(parents=True, exist_ok=True)
     if is_enabled("remark42"):
         Path("app/remark42").mkdir(parents=True, exist_ok=True)
     if is_enabled("memos"):

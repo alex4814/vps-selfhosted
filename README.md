@@ -1,4 +1,4 @@
-# iHost
+# VPS Selfhosted
 Hosting various services on your private server with Docker Compose.
 A setup tool is provided for flexible configuration.
 
@@ -34,9 +34,6 @@ Finally, run `docker compose up -d` to start.
 
 ## Services
 
-### [V2ray](https://github.com/v2fly/v2ray-core)
-> A platform for building proxies to bypass network restrictions.
-
 ### [XRay](https://github.com/XTLS/Xray-core)
 > Xray, Penetrates Everything. Also the best v2ray-core, with XTLS support. Fully compatible configuration.
 
@@ -70,3 +67,4 @@ TODO
 ## Thanks
 [Docker Practice](https://github.com/yeasy/docker_practice)  
 [LNMP Docker](https://github.com/khs1994-docker/lnmp)
+[integrated-examples](https://github.com/lxhao61/integrated-examples)

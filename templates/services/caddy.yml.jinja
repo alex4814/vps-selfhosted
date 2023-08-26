@@ -1,12 +1,11 @@
 {%- set blog = settings.services.blog %}
 build: .
 restart: unless-stopped
+command: ["caddy", "run", "--config", "/etc/caddy/caddy.json"]
 ports:
-  - "80:80"
-  - "443:443"
-  - "443:443/udp"
+  - "7443"
 volumes:
-  - ./config/caddy/Caddyfile:/etc/caddy/Caddyfile
+  - ./config/caddy/caddy.json:/etc/caddy/caddy.json
   - ./log/caddy:/var/log/caddy
   - {{ blog.root }}:/srv
   - caddy_data:/data

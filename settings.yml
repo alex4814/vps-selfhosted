@@ -3,7 +3,7 @@ dockers:
   caddy:
     template: templates/services/caddy.yml.jinja
     volume_template: templates/volumes/caddy.yml.jinja
-    config_template: templates/configs/caddy/Caddyfile.jinja
+    config_template: templates/configs/caddy/caddy.json.jinja
     tls:
       wildcard: false
       acme_dns: cloudflare
@@ -11,19 +11,13 @@ dockers:
   blog:
     enabled: true
 
-  v2ray:
-    enabled: false
-    template: templates/services/v2ray.yml.jinja
-    scheme: "vless_grpc_loopback"
-    config_template:
-      vless_grpc_loopback: templates/configs/v2ray/vless_grpc_loopback.json.jinja
-
   xray:
     enabled: true
     template: templates/services/xray.yml.jinja
-    scheme: "vless_grpc_loopback"
+    scheme: reality_vision_with_caddy
     config_template:
       vless_grpc_loopback: templates/configs/xray/vless_grpc_loopback.json.jinja
+      reality_vision_with_caddy: templates/configs/xray/reality_vision_with_caddy.json.jinja
 
   freshrss:
     enabled: true

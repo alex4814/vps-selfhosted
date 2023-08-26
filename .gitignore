@@ -1,7 +1,7 @@
 # Generated configurations
 docker-compose.yml
 config/caddy/
-config/v2ray/
+config/xray/
 
 # log files
 log/

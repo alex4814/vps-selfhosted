@@ -4,6 +4,8 @@ image: umputun/remark42:${TAG_REMARK42:-latest}
 restart: always
 volumes:
   - ./app/remark42:/srv/var
+expose:
+  - "8080"
 logging:
   driver: json-file
   options:
